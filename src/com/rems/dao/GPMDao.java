@@ -27,7 +27,7 @@ public interface GPMDao {
 
 	public String assignEmoloyeeToProject(int pid, int eid, int daily_wage) throws EmployeeException, ProjectException;
 
-	public String attendence(String date) throws AttendanceException;
+	public String attendence(int pid, int eid, String date, int present_absent) throws AttendanceException;
 
-	public List<Salary> contributionOfEmployee() throws SalaryException;
+	public List<Salary> contributionOfEmployee(int pid) throws SalaryException;
 }

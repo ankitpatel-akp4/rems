@@ -1,5 +1,5 @@
 #### fearless-humor-9094
-
+![](https://github.com/indicate0/fearless-humor-9094/blob/main/rems_logo.png?raw=true)
 # REMS 
 ## Rural Employment Management System
 
@@ -7,6 +7,7 @@ MNREGA(The Mahatma Gandhi National Rural Employment Guarantee Act ) is a scheme 
 ### There are two users of this system : 
  - BDO (Block Development Officer) 
  - Gram Panchayat member
+ 
 ### System works in the following way:
 A project is created by BDO. Project is where people are assigned to. Before assigning anybody to a project(done by Gram Panchayat member) his/her data must be inserted into the system.
 

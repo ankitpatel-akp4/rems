@@ -15,7 +15,7 @@ public class Employee {
 	private String emobile;
 	private String edob;
 	private String e_registration_date;
-	private Gender gender;
+	private String gender;
 	private String aadhar;
 	private String banck_account;
 	private String ifsc;
@@ -25,7 +25,7 @@ public class Employee {
 	}
 
 	public Employee(int eid, int egid, String ename, String eemail, String emobile, String edob,
-			String e_registration_date, Gender gender, String aadhar, String banck_account, String ifsc) {
+			String e_registration_date, String gender, String aadhar, String banck_account, String ifsc) {
 		super();
 		this.eid = eid;
 		this.egid = egid;
@@ -42,10 +42,10 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [eid=" + eid + ", egid=" + egid + ", ename=" + ename + ", eemail=" + eemail + ", emobile="
-				+ emobile + ", edob=" + edob + ", e_registration_date=" + e_registration_date + ", gender=" + gender
-				+ ", aadhar=" + aadhar + ", banck_account=" + banck_account + ", ifsc=" + ifsc + "]";
-
+		return "Employee id= " + eid + "\nGPM id= " + egid + "\nName= " + ename + "\nEmail= " + eemail + "\nMobile= "
+				+ emobile + "\ndob= " + edob + "\nRestration date= " + e_registration_date + "\nGender= " + gender
+				+ "\nAadhar no= " + aadhar + "\nBanck account= " + banck_account + "\nIFSC= " + ifsc
+				+ "\n**************************\n";
 	}
 
 	public int getEid() {
@@ -104,11 +104,11 @@ public class Employee {
 		this.e_registration_date = e_registration_date;
 	}
 
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

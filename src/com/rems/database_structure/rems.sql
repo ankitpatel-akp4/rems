@@ -9,7 +9,7 @@ create table users
 uid int not null,
 did enum('bdo','gpm','admin') not null,
 password varchar(30) not null,
-constraint uid_did unique (uid,did)
+constraint unique (uid,did)
 );
 -- initial values
 insert into users values (1,'bdo','123');
@@ -64,6 +64,7 @@ create table project
 (
 pid int primary key auto_increment,
 pgid int,
+pbid int,
 pname varchar(50),
 pdescription varchar(1000),
 budget int not null,
@@ -72,6 +73,7 @@ pexpected_end_date date not null,
 pend_date date,
 total_amount_expended int,
 foreign key (pgid)  references gpm (gid)
+foreign key (pbid)  references bdo (bid)
 );
 
 
@@ -81,7 +83,8 @@ pepid int,
 peeid int,
 daily_wage int,
 foreign key (pepid) references project (pid),
-foreign key (peeid) references employee (eid)
+foreign key (peeid) references employee (eid),
+constraint unique (pepid,peeid)
 );
 
 create table attendance
@@ -93,3 +96,13 @@ present_absent boolean,
 foreign key (apid) references project (pid),
 foreign key (aeid) references employee (eid)
 );
+
+
+
+
+
+
+
+
+
+

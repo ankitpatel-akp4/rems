@@ -6,9 +6,9 @@ package com.rems.dao;
 import java.util.List;
 
 import com.rems.bean.BDO;
-import com.rems.bean.Employee;
 import com.rems.bean.GPM;
 import com.rems.bean.Project;
+import com.rems.bean.Salary;
 import com.rems.exception.BDOException;
 import com.rems.exception.EmployeeException;
 import com.rems.exception.GPMException;
@@ -31,5 +31,7 @@ public interface BDODao {
 
 	public String allocateProjectToGPM(int gid, int pid) throws GPMException, ProjectException;
 
-	public List<Employee> viewProjectEmployee(int pid) throws ProjectException, EmployeeException;
+	public List<Salary> viewProjectEmployee(int pid) throws ProjectException, EmployeeException;
+
+	public String updateDateAmount(int pid, String date, int amount) throws ProjectException;
 }

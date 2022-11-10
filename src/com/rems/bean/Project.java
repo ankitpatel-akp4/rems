@@ -3,6 +3,7 @@ package com.rems.bean;
 public class Project {
 	private int pid;
 	private int pgid;
+	private int pbid;
 	private String pname;
 	private String pdescription;
 	private int budget;
@@ -15,11 +16,12 @@ public class Project {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Project(int pid, int pgid, String pname, String pdescription, int budget, String pstart_date,
+	public Project(int pid, int pgid, int pbid, String pname, String pdescription, int budget, String pstart_date,
 			String pexpected_end_date, String pend_date, int total_amount_expended) {
 		super();
 		this.pid = pid;
 		this.pgid = pgid;
+		this.pbid = pbid;
 		this.pname = pname;
 		this.pdescription = pdescription;
 		this.budget = budget;
@@ -31,9 +33,11 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [pid=" + pid + ", pgid=" + pgid + ",  pname=" + pname + ", pdescription=" + pdescription
-				+ ", budget=" + budget + ", pstart_date=" + pstart_date + ", pexpected_end_date=" + pexpected_end_date
-				+ ", pend_date=" + pend_date + ", total_amount_expended=" + total_amount_expended + "]";
+		return "Project id: " + pid + "\nAssign to gpm id: " + pgid + "\nCreated by bdo id: " + pbid + "\nProject name:"
+				+ pname + "\nProject description: " + pdescription + "\nBudget: " + budget + "\nStart date:"
+				+ pstart_date + "\nExpected end date: " + pexpected_end_date + "\nEnd date: " + pend_date
+				+ "\nTotal amount expended: " + total_amount_expended
+				+ "\nNote: value 0 means null.\n************************\n";
 	}
 
 	public int getPid() {
@@ -50,6 +54,14 @@ public class Project {
 
 	public void setPgid(int pgid) {
 		this.pgid = pgid;
+	}
+
+	public int getPbid() {
+		return pbid;
+	}
+
+	public void setPbid(int pbid) {
+		this.pbid = pbid;
 	}
 
 	public String getPname() {
@@ -107,4 +119,5 @@ public class Project {
 	public void setTotal_amount_expended(int total_amount_expended) {
 		this.total_amount_expended = total_amount_expended;
 	}
+
 }
