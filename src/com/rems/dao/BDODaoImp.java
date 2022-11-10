@@ -20,7 +20,7 @@ import com.rems.exception.BDOException;
 import com.rems.exception.EmployeeException;
 import com.rems.exception.GPMException;
 import com.rems.exception.ProjectException;
-import com.rems.util.DBConnection;
+import com.rems.util.DBUtil;
 
 /**
  * @author indicate0
@@ -31,7 +31,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public BDO login(int bid, String password) throws BDOException {
 		BDO bdo = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn
 					.prepareStatement("select * from users where uid=? and did='bdo' and password=?");
 			ps.setInt(1, bid);
@@ -62,7 +62,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public String creatProject(Project project) throws ProjectException {
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
 					"insert into project (pbid,pname, pdescription, budget, pstart_date,pexpected_end_date) values (?,?,?,?,?,?)");
 			ps.setInt(1, project.getPbid());
@@ -90,7 +90,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public List<Project> viewProjects() throws ProjectException {
 		List<Project> projects = new ArrayList<>();
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement("select * from project");
 
 			ResultSet rs = ps.executeQuery();
@@ -113,7 +113,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public String createGPM(GPM gpm) throws GPMException {
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn
 					.prepareStatement("insert into gpm (gbid,gname,gemail,gmobile,gpin_code) values (?,?,?,?,?)");
 			ps.setInt(1, gpm.getGbid());
@@ -163,7 +163,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public List<GPM> viewGPM() throws GPMException {
 		List<GPM> gpms = new ArrayList<>();
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement("select * from gpm");
 
 			ResultSet rs = ps.executeQuery();
@@ -186,7 +186,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public String allocateProjectToGPM(int gid, int pid) throws GPMException, ProjectException {
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement("update project set pgid=? where pid=?");
 			ps.setInt(1, gid);
 			ps.setInt(2, pid);
@@ -216,7 +216,7 @@ public class BDODaoImp implements BDODao {
 	@Override
 	public String updateDateAmount(int pid, String date, int amount) throws ProjectException {
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn
 					.prepareStatement("update project set pend_date=?,total_amount_expended=? where pid=?");
 			ps.setString(1, date);

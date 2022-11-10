@@ -19,7 +19,7 @@ import com.rems.exception.EmployeeException;
 import com.rems.exception.GPMException;
 import com.rems.exception.ProjectException;
 import com.rems.exception.SalaryException;
-import com.rems.util.DBConnection;
+import com.rems.util.DBUtil;
 
 /**
  * @author indicate0
@@ -30,7 +30,7 @@ public class GPMDaoImp implements GPMDao {
 	@Override
 	public GPM login(int gid, String password) throws GPMException {
 		GPM gpm = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn
 					.prepareStatement("select * from users where uid=? and did='gpm' and password=?");
 			ps.setInt(1, gid);
@@ -61,7 +61,7 @@ public class GPMDaoImp implements GPMDao {
 	@Override
 	public String createEmployee(Employee emp) throws EmployeeException {
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
 					"insert into employee (egid, ename, eemail, emobile, edob, e_registration_date, gender, aadhar, banck_account, ifsc) values (?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, emp.getEgid());
@@ -93,7 +93,7 @@ public class GPMDaoImp implements GPMDao {
 	@Override
 	public List<Employee> viewAllEmployee() throws EmployeeException {
 		List<Employee> employees = new ArrayList<>();
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement("select * from employee");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -116,7 +116,7 @@ public class GPMDaoImp implements GPMDao {
 	@Override
 	public String assignEmoloyeeToProject(int pid, int eid, int daily_wage) throws EmployeeException, ProjectException {
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement("insert into project_employee_payment values(?,?,?)");
 			ps.setInt(1, pid);
 			ps.setInt(2, eid);
@@ -141,7 +141,7 @@ public class GPMDaoImp implements GPMDao {
 	public String attendence(int pid, int eid, String date, int present_absent) throws AttendanceException {
 
 		String msg = null;
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement("insert into attendance values(?,?,?,?)");
 			ps.setInt(1, pid);
 			ps.setInt(2, eid);
@@ -167,7 +167,7 @@ public class GPMDaoImp implements GPMDao {
 	@Override
 	public List<Salary> contributionOfEmployee(int pid) throws SalaryException {
 		List<Salary> salaries = new ArrayList<>();
-		try (Connection conn = DBConnection.getDBConnection()) {
+		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
 					"select apid, aeid, count(aeid), daily_wage from project_employee_payment p inner join attendance a on apid=pepid and aeid=peeid where apid=? and present_absent=1 group by apid, aeid, daily_wage order by apid, aeid");
 			ps.setInt(1, pid);
