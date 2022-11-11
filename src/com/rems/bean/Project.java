@@ -12,6 +12,17 @@ public class Project {
 	private String pend_date;
 	private int total_amount_expended;
 
+//	pid int primary key auto_increment,
+//	gid int,
+//	bid int,
+//	pname varchar(50),
+//	pdescription varchar(1000),
+//	budget int not null,
+//	pstart_date date not null,
+//	pexpected_end_date date not null,
+//	pend_date date,
+//	total_amount_expended int,
+
 	public Project() {
 		// TODO Auto-generated constructor stub
 	}

@@ -63,7 +63,7 @@ public class GPMDaoImp implements GPMDao {
 		String msg = null;
 		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
-					"insert into employee (egid, ename, eemail, emobile, edob, e_registration_date, gender, aadhar, banck_account, ifsc) values (?,?,?,?,?,?,?,?,?,?)");
+					"insert into employee (gid, ename, eemail, emobile, edob, e_registration_date, gender, aadhar, bank_account, ifsc) values (?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, emp.getEgid());
 			ps.setString(2, emp.getEname());
 			ps.setString(3, emp.getEemail());
@@ -71,9 +71,9 @@ public class GPMDaoImp implements GPMDao {
 			ps.setString(5, emp.getEdob());
 			ps.setString(6, emp.getE_registration_date());
 			ps.setString(7, emp.getGender());
-			ps.setString(8, emp.getEdob());
-			ps.setString(9, emp.getEdob());
-			ps.setString(10, emp.getEdob());
+			ps.setString(8, emp.getAadhar());
+			ps.setString(9, emp.getBanck_account());
+			ps.setString(10, emp.getIfsc());
 			int res = ps.executeUpdate();
 			if (res > 0) {
 				msg = "Employee created successfully....";
@@ -83,7 +83,7 @@ public class GPMDaoImp implements GPMDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new EmployeeException(e.getMessage());
 		}
 
@@ -101,12 +101,12 @@ public class GPMDaoImp implements GPMDao {
 						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
 						rs.getString(10), rs.getString(11)));
 			}
-			if (employees.size() < 0) {
+			if (employees.size() <= 0) {
 				throw new EmployeeException("Opps... no project is added yet");
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new EmployeeException(e.getMessage());
 		}
 
@@ -169,7 +169,7 @@ public class GPMDaoImp implements GPMDao {
 		List<Salary> salaries = new ArrayList<>();
 		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
-					"select apid, aeid, count(aeid), daily_wage from project_employee_payment p inner join attendance a on apid=pepid and aeid=peeid where apid=? and present_absent=1 group by apid, aeid, daily_wage order by apid, aeid");
+					"select p.pid, p.eid, count(p.eid), daily_wage from project_employee_payment p inner join attendance a on p.pid=a.pid and p.eid=a.eid where a.pid=? and present_absent=1 group by p.pid, p.eid, daily_wage order by p.pid, p.eid");
 			ps.setInt(1, pid);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

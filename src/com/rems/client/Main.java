@@ -20,7 +20,7 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			try {
-				System.out.println("Enter...");
+				System.out.println("\nEnter...");
 				System.out.println("1 to login as BDO.");
 				System.out.println("2 to login as GPM.");
 				System.out.println("0 to exit");

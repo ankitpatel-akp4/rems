@@ -64,7 +64,7 @@ public class BDODaoImp implements BDODao {
 		String msg = null;
 		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
-					"insert into project (pbid,pname, pdescription, budget, pstart_date,pexpected_end_date) values (?,?,?,?,?,?)");
+					"insert into project (bid,pname, pdescription, budget, pstart_date,pexpected_end_date) values (?,?,?,?,?,?)");
 			ps.setInt(1, project.getPbid());
 			ps.setString(2, project.getPname());
 			ps.setString(3, project.getPdescription());
@@ -95,10 +95,10 @@ public class BDODaoImp implements BDODao {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				projects.add(new Project(rs.getInt(1), rs.getInt(2), rs.getInt(10), rs.getString(3), rs.getString(3),
-						rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+				projects.add(new Project(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+						rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10)));
 			}
-			if (projects.size() < 0) {
+			if (projects.size() <= 0) {
 				throw new ProjectException("Opps... no project is added yet");
 			}
 
@@ -115,7 +115,7 @@ public class BDODaoImp implements BDODao {
 		String msg = null;
 		try (Connection conn = DBUtil.getDBConnection()) {
 			PreparedStatement ps = conn
-					.prepareStatement("insert into gpm (gbid,gname,gemail,gmobile,gpin_code) values (?,?,?,?,?)");
+					.prepareStatement("insert into gpm (bid,gname,gemail,gmobile,gpin_code) values (?,?,?,?,?)");
 			ps.setInt(1, gpm.getGbid());
 			ps.setString(2, gpm.getGname());
 			ps.setString(3, gpm.getGemail());
@@ -126,7 +126,7 @@ public class BDODaoImp implements BDODao {
 			if (res > 0) {
 				msg = "GPM created successfully....";
 				PreparedStatement ps1 = conn.prepareStatement(
-						"select gid from gpm where gbid=? and gname=? and gemail=? and gmobile=? and gpin_code=?");
+						"select gid from gpm where bid=? and gname=? and gemail=? and gmobile=? and gpin_code=?");
 				ps1.setInt(1, gpm.getGbid());
 				ps1.setString(2, gpm.getGname());
 				ps1.setString(3, gpm.getGemail());
@@ -171,7 +171,7 @@ public class BDODaoImp implements BDODao {
 				gpms.add(new GPM(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6)));
 			}
-			if (gpms.size() < 0) {
+			if (gpms.size() <= 0) {
 				throw new GPMException("Opps... no project is added yet");
 			}
 
@@ -187,7 +187,7 @@ public class BDODaoImp implements BDODao {
 	public String allocateProjectToGPM(int gid, int pid) throws GPMException, ProjectException {
 		String msg = null;
 		try (Connection conn = DBUtil.getDBConnection()) {
-			PreparedStatement ps = conn.prepareStatement("update project set pgid=? where pid=?");
+			PreparedStatement ps = conn.prepareStatement("update project set gid=? where pid=?");
 			ps.setInt(1, gid);
 			ps.setInt(2, pid);
 			int res = ps.executeUpdate();

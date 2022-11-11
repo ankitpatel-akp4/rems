@@ -38,7 +38,7 @@ public class GPMClient {
 			System.out.println("-----------------------------------------------------");
 			while (true) {
 				try {
-					System.out.println("Enter...");
+					System.out.println("\nEnter...");
 					System.out.println("1 to create an employee.");
 					System.out.println("2 to view all employees.");
 					System.out.println("3 to assign an emoloyee to a project.");

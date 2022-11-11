@@ -1,9 +1,7 @@
 -- REMS Database Structure.
-
-drop database rems;
-create database rems;
-use rems;
-
+--drop database masai_rems;
+create database masai_rems;
+use masai_rems;
 create table users 
 (
 uid int not null,
@@ -34,19 +32,19 @@ insert into bdo values (3,'Luna','1234@gmail.com','251719','Surat','Gujarat');
 create table gpm
 (
 gid int primary key auto_increment,
-gbid int,
+bid int,
 gname varchar(25),
 gemail varchar(25),
 gmobile varchar(15),
 gpin_code varchar(10),
-foreign key (gbid) references bdo (bid)
+foreign key (bid) references bdo (bid)
 );
 
 
 create table employee
 ( 
 eid int primary key auto_increment,
-egid int, 
+gid int, 
 ename varchar(40),
 eemail varchar(25),
 emobile varchar(15),
@@ -54,17 +52,17 @@ edob date,
 e_registration_date  date,
 gender enum('male','female','other'),
 aadhar varchar(12) unique not null,
-banck_account varchar(20),
+bank_account varchar(20),
 ifsc varchar(15),
-foreign key (egid) references gpm (gid)
+foreign key (gid) references gpm (gid)
 );
 
 
 create table project
 (
 pid int primary key auto_increment,
-pgid int,
-pbid int,
+gid int,
+bid int,
 pname varchar(50),
 pdescription varchar(1000),
 budget int not null,
@@ -72,34 +70,34 @@ pstart_date date not null,
 pexpected_end_date date not null,
 pend_date date,
 total_amount_expended int,
-foreign key (pgid)  references gpm (gid)
-foreign key (pbid)  references bdo (bid)
+foreign key (gid)  references gpm (gid),
+foreign key (bid)  references bdo (bid)
 );
 
 
 create table project_employee_payment
 (
-pepid int,
-peeid int,
+pid int,
+eid int,
 daily_wage int,
-foreign key (pepid) references project (pid),
-foreign key (peeid) references employee (eid),
-constraint unique (pepid,peeid)
+foreign key (pid) references project (pid),
+foreign key (eid) references employee (eid),
+constraint unique (pid,eid)
 );
 
 create table attendance
 (
-apid int,
-aeid int,
+pid int,
+eid int,
 adate date,
 present_absent boolean,
-foreign key (apid) references project (pid),
-foreign key (aeid) references employee (eid)
+foreign key (pid) references project (pid),
+foreign key (eid) references employee (eid)
 );
 
 
 
-
+--show tables;
 
 
 
