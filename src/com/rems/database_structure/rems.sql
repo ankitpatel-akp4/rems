@@ -1,18 +1,36 @@
 -- REMS Database Structure.
---drop database masai_rems;
+-- drop database masai_rems;
 create database masai_rems;
 use masai_rems;
+
+
+create table department (
+did int primary key auto_increment,
+dname varchar(15)
+);
+
+-- initial values
+insert into department values (1, 'admin');
+insert into department values (2, 'bdo');
+insert into department values (3, 'gpm');
+
 create table users 
 (
 uid int not null,
-did enum('bdo','gpm','admin') not null,
+did int not null,
 password varchar(30) not null,
+foreign key (did) references department (did),
 constraint unique (uid,did)
 );
+
+
 -- initial values
-insert into users values (1,'bdo','123');
-insert into users values (2,'bdo','123');
-insert into users values (3,'bdo','1234');
+insert into users values (1, 2,'123');
+insert into users values (2, 2,'123');
+insert into users values (3, 2,'123');
+
+
+
 
 
 create table bdo(
@@ -97,9 +115,34 @@ foreign key (eid) references employee (eid)
 
 
 
---show tables;
+-- show tables;
 
+-- queries used
 
+-- to log in
+-- select * from users where uid=? and did=2 and password=?
+-- select * from gpm where gid=?"
+-- select * from users where uid=? and did=1 and password=?
+-- select * from bdo where bid=?"
+
+-- to insert 
+-- insert into project (bid,pname, pdescription, budget, pstart_date,pexpected_end_date) values (?,?,?,?,?,?)
+-- insert into gpm (bid,gname,gemail,gmobile,gpin_code) values (?,?,?,?,?)
+-- insert into users values (?,'gpm',?)
+-- insert into employee (gid, ename, eemail, emobile, edob, e_registration_date, gender, aadhar, bank_account, ifsc) values (?,?,?,?,?,?,?,?,?,?)")
+-- insert into project_employee_payment values(?,?,?)
+-- insert into attendance values(?,?,?,?)
+--
+-- to update 
+-- update project set gid=? where pid=?
+-- update project set pend_date=?,total_amount_expended=? where pid=?
+--
+-- te retrieve data 
+-- select * from project
+-- select gid from gpm where bid=? and gname=? and gemail=? and gmobile=? and gpin_code=?
+-- select * from employee
+-- select p.pid, p.eid, count(p.eid), daily_wage from project_employee_payment p inner join attendance a on p.pid=a.pid and p.eid=a.eid where a.pid=? and present_absent=1 group by p.pid, p.eid, daily_wage order by p.pid, p.eid
+--
 
 
 

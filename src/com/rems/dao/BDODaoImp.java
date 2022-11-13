@@ -32,8 +32,7 @@ public class BDODaoImp implements BDODao {
 	public BDO login(int bid, String password) throws BDOException {
 		BDO bdo = null;
 		try (Connection conn = DBUtil.getDBConnection()) {
-			PreparedStatement ps = conn
-					.prepareStatement("select * from users where uid=? and did='bdo' and password=?");
+			PreparedStatement ps = conn.prepareStatement("select * from users where uid=? and did=2 and password=?");
 			ps.setInt(1, bid);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
@@ -52,7 +51,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new BDOException(e.getMessage());
 		}
 
@@ -80,7 +79,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new ProjectException(e.getMessage());
 		}
 
@@ -103,7 +102,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new ProjectException(e.getMessage());
 		}
 
@@ -134,7 +133,7 @@ public class BDODaoImp implements BDODao {
 				ps1.setString(5, gpm.getGpin_code());
 				ResultSet res1 = ps1.executeQuery();
 				if (res1.next()) {
-					PreparedStatement ps2 = conn.prepareStatement("insert into users values (?,'gpm',?)");
+					PreparedStatement ps2 = conn.prepareStatement("insert into users values (?,3,?)");
 					ps2.setInt(1, res1.getInt(1));
 					Scanner scan = new Scanner(System.in);
 					System.out.println("Enter password of gpm: ");
@@ -153,7 +152,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new GPMException(e.getMessage());
 		}
 
@@ -176,7 +175,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new GPMException(e.getMessage());
 		}
 
@@ -199,7 +198,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new ProjectException(e.getMessage());
 		}
 
@@ -231,7 +230,7 @@ public class BDODaoImp implements BDODao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new ProjectException(e.getMessage());
 		}
 

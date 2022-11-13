@@ -39,6 +39,9 @@ public class Main {
 			} catch (InputMismatchException e) {
 				System.out.println("Please Enter a valid input...\n");
 				scan = new Scanner(System.in);
+			} catch (Exception e) {
+				System.out.println(e.getMessage() + "\n");
+
 			}
 		}
 

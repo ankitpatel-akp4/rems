@@ -31,8 +31,7 @@ public class GPMDaoImp implements GPMDao {
 	public GPM login(int gid, String password) throws GPMException {
 		GPM gpm = null;
 		try (Connection conn = DBUtil.getDBConnection()) {
-			PreparedStatement ps = conn
-					.prepareStatement("select * from users where uid=? and did='gpm' and password=?");
+			PreparedStatement ps = conn.prepareStatement("select * from users where uid=? and did=3 and password=?");
 			ps.setInt(1, gid);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
@@ -130,7 +129,7 @@ public class GPMDaoImp implements GPMDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new ProjectException(e.getMessage());
 		}
 
@@ -157,7 +156,7 @@ public class GPMDaoImp implements GPMDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new AttendanceException(e.getMessage());
 		}
 
@@ -180,7 +179,7 @@ public class GPMDaoImp implements GPMDao {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new SalaryException(e.getMessage());
 		}
 
